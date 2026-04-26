@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'HalenoirExpanded';
+  src: url('../SOURCE/Font/HalenoirExpanded-Bold.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HalenoirCompactText';
+  src: url('../SOURCE/Font/HalenoirCompactText-Regular.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono';
+  src: url('../SOURCE/Font/Roboto-Mono-300.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Force all RobotoMono text to a single gray color */
+[style*="RobotoMono"], 
+[style*='RobotoMono'], 
+.font-mono {
+  color: #888888 !important;
+}
+
+@theme {
+  --font-serif: "HalenoirExpanded", "Playfair Display", serif;
+  --font-sans: "HalenoirCompactText", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "RobotoMono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer utilities {
+  .hover-hologram {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-hologram:hover {
+    color: #e4ff40 !important;
+  }
+
+  .hologram-bg {
+    background-color: #e4ff40 !important;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+body {
+  @apply bg-[#0a0a0a] text-white font-sans;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
