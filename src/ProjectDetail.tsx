@@ -599,7 +599,11 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                                  )}
                              </div>
                              <div className="text-[10px] md:text-sm text-white/50 font-sans">
-                                 <p className="text-white/80 font-medium">Designed still frames, animation briefs, and Midjourney Vee 3D motion footage.</p>
+                                 <p className="text-white/80 font-medium">
+                                   {idx === 0 
+                                     ? "Designed still frames, animation briefs." 
+                                     : "Designed still frames, animation briefs, and Midjourney Vee 3D motion footage."}
+                                 </p>
                                  <p>Video was produced by the Circus team.</p>
                              </div>
                          </div>
