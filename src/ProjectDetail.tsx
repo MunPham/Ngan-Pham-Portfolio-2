@@ -203,7 +203,7 @@ const HorizontalScrollRow = ({ images, heightClass = "h-[50vh] md:h-[65vh]", wid
   );
 };
 
-const VideoPlayerBlock = ({ videoUrl }: { videoUrl: string }) => {
+const VideoPlayerBlock = ({ videoUrl, posterUrl }: { videoUrl: string, posterUrl?: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -218,11 +218,18 @@ const VideoPlayerBlock = ({ videoUrl }: { videoUrl: string }) => {
     }
   };
 
+  // Derive poster from Cloudinary URL if not provided - use so_0 to grab first frame reliably
+  const derivedPoster = posterUrl || (videoUrl.includes('cloudinary.com') ? videoUrl.replace('/upload/', '/upload/so_0/').replace(/\.[^/.]+$/, ".jpg") : undefined);
+
+  // Add #t=0.001 to force iOS/Safari to preload the first frame as the poster natively
+  const videoSrcWithTime = videoUrl.includes('#t=') ? videoUrl : `${videoUrl}#t=0.001`;
+
   return (
     <div className="h-full aspect-[4/5] bg-black/80 overflow-hidden group border border-white/10 relative shrink-0 cursor-pointer" onClick={togglePlay}>
       <video 
         ref={videoRef}
-        src={videoUrl} 
+        src={videoSrcWithTime} 
+        poster={derivedPoster}
         className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" 
         playsInline
         loop
@@ -233,7 +240,7 @@ const VideoPlayerBlock = ({ videoUrl }: { videoUrl: string }) => {
             <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
           </div>
           <div 
-            className="mt-4 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full text-white group-hover:text-[#888888] transition-colors duration-300 tracking-[0.2em] uppercase border border-white/10 whitespace-nowrap"
+            className="mt-4 px-4 py-2 bg-black/60 backdrop-blur-md rounded-full text-white group-hover:text-[#e4ff40] transition-colors duration-300 tracking-[0.2em] uppercase border border-white/10 whitespace-nowrap"
             style={{ fontFamily: "'RobotoMono', monospace", fontSize: '12px', fontWeight: 300 }}
           >
             Click to play
@@ -333,7 +340,11 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
       {/* Header - Fixed to top outside the modal tab to keep it completely unchanged */}
       <div className="absolute top-0 left-0 right-0 h-24 md:h-24 w-full flex items-center justify-between px-6 md:px-12 pointer-events-none z-[110]">
         {/* Left: Info */}
-        <div className="flex items-center gap-3 text-[12px] uppercase tracking-[0.2em] text-[#888888]" style={{ fontFamily: "'RobotoMono', monospace" }}>
+        <div 
+          className="pointer-events-auto flex items-center gap-3 text-[12px] uppercase tracking-[0.2em] text-[#888888] cursor-default" 
+          style={{ fontFamily: "'RobotoMono', monospace" }}
+          onClick={(e) => e.stopPropagation()}
+        >
           <span>{brand.name}</span>
           <span className="text-white/30">/</span>
           <span>{brand.year}</span>
@@ -348,7 +359,7 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
         {/* Right: Close Button */}
         <button 
           onClick={onClose}
-          className="pointer-events-auto flex items-center gap-2 text-[12px] uppercase tracking-[0.4em] transition-colors hover:text-[#888888] text-[#888888] group cursor-pointer"
+          className="pointer-events-auto flex items-center gap-2 text-[12px] uppercase tracking-[0.4em] transition-colors hover:text-[#e4ff40] text-[#888888] group cursor-pointer"
           style={{ fontFamily: "'RobotoMono', monospace" }}
         >
           <X size={14} className="group-hover:rotate-90 transition-transform duration-300" /> CLOSE
@@ -375,9 +386,9 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                   {/* Scroll Down Indicator */}
                   <div 
                      onClick={scrollToTV}
-                     className="group flex flex-col items-end cursor-pointer pr-2"
+                     className="group flex flex-col items-end cursor-pointer pr-2 pointer-events-auto"
                   >
-                    <div className="flex items-center gap-2 text-white group-hover:text-[#e4ff40] transition-colors duration-300">
+                    <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
                       <span className="text-[12px] tracking-[0.4em] uppercase" style={{ fontFamily: 'RobotoMono', fontSize: '12px' }}>Scroll down for more</span>
                       <span className="relative flex items-center overflow-hidden w-4 h-4">
                         <ArrowDown className="w-4 h-4 absolute opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
@@ -411,9 +422,9 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                   {/* Scroll Down Indicator */}
                   <div 
                      onClick={scrollToPonnieSection2}
-                     className="group flex flex-col items-end cursor-pointer pr-2"
+                     className="group flex flex-col items-end cursor-pointer pr-2 pointer-events-auto"
                   >
-                    <div className="flex items-center gap-2 text-white group-hover:text-[#e4ff40] transition-colors duration-300">
+                    <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
                       <span className="text-[12px] tracking-[0.4em] uppercase" style={{ fontFamily: 'RobotoMono', fontSize: '12px' }}>Scroll down for more</span>
                       <span className="relative flex items-center overflow-hidden w-4 h-4">
                         <ArrowDown className="w-4 h-4 absolute opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
@@ -434,8 +445,18 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                     
                     {/* Add Scroll Down Indicator for all but the last item */}
                     {idx < 3 && (
-                      <div className="group flex flex-col items-end pl-2 md:pr-2">
-                        <div className="flex items-center gap-2 text-white group-hover:text-[#e4ff40] transition-colors duration-300">
+                      <div 
+                        className="group flex flex-col items-end pl-2 md:pr-2 cursor-pointer pointer-events-auto"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const currentEl = e.currentTarget;
+                          const nextSection = currentEl.closest('.snap-start')?.nextElementSibling;
+                          if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
                           <span className="text-[12px] tracking-[0.4em] uppercase" style={{ fontFamily: 'RobotoMono', fontSize: '12px' }}>Scroll down for more</span>
                           <span className="relative flex items-center overflow-hidden w-4 h-4">
                             <ArrowDown className="w-4 h-4 absolute opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
@@ -485,9 +506,9 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                   {/* Scroll Down Indicator */}
                   <div 
                      onClick={scrollToVisaSection2}
-                     className="group flex flex-col items-end cursor-pointer pr-2"
+                     className="group flex flex-col items-end cursor-pointer pr-2 pointer-events-auto"
                   >
-                    <div className="flex items-center gap-2 text-white group-hover:text-[#e4ff40] transition-colors duration-300">
+                    <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
                       <span className="text-[12px] tracking-[0.4em] uppercase" style={{ fontFamily: 'RobotoMono', fontSize: '12px' }}>Scroll down for more</span>
                       <span className="relative flex items-center overflow-hidden w-4 h-4">
                         <ArrowDown className="w-4 h-4 absolute opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
@@ -645,7 +666,7 @@ const ProjectDetail = () => {
           <div className="flex items-center gap-8">
             <button 
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.4em] transition-colors hover:text-[#888888] cursor-pointer"
+              className="flex items-center gap-2 text-[12px] uppercase tracking-[0.4em] text-[#888888] transition-colors hover:text-[#e4ff40] cursor-pointer"
               style={{ fontFamily: "'RobotoMono', monospace" }}
             >
               <ArrowLeft size={14} /> Back
@@ -678,7 +699,7 @@ const ProjectDetail = () => {
                         className={`cursor-pointer text-left px-5 py-4 text-[10px] uppercase tracking-[0.2em] transition-colors ${
                           idx === projectIndex 
                             ? 'bg-white/20 text-[#888888]' 
-                            : 'text-[#888888] hover:bg-white/10 hover:text-white'
+                            : 'text-[#888888] hover:bg-[#e4ff40]/10 hover:text-[#e4ff40]'
                         }`}
                         style={{ fontFamily: "'RobotoMono', monospace" }}
                       >
@@ -826,7 +847,7 @@ const ProjectDetail = () => {
                    onClick={() => document.getElementById("other-merch")?.scrollIntoView({ behavior: 'smooth' })}
                    className="group flex flex-col items-center cursor-pointer pointer-events-auto"
                 >
-                  <div className="flex items-center gap-2 text-white group-hover:text-[#e4ff40] transition-colors duration-300">
+                  <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
                     <span className="text-[12px] tracking-[0.4em] uppercase" style={{ fontFamily: 'RobotoMono', fontSize: '12px' }}>Scroll down for more</span>
                     <span className="relative flex items-center overflow-hidden w-4 h-4">
                       <ArrowDown className="w-4 h-4 absolute opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />

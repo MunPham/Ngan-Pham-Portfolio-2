@@ -205,7 +205,7 @@ function Home() {
               <div key={tab}>
                 <button 
                   onClick={() => scrollToSection(tab.toLowerCase())}
-                  className={`text-[12px] uppercase tracking-[0.4em] transition-all cursor-pointer relative py-2 hover-hologram ${activeTab === tab ? "text-foreground font-bold" : "text-[#888888] hover:text-white"}`}
+                  className={`text-[12px] uppercase tracking-[0.4em] transition-all cursor-pointer relative py-2 hover-hologram ${activeTab === tab ? "text-foreground font-bold" : "text-[#888888] hover:text-[#e4ff40]"}`}
                   style={{ fontFamily: "'RobotoMono', monospace" }}
                 >
                   {tab}
@@ -280,7 +280,7 @@ function Home() {
               setIsAudioMuted(!isAudioMuted);
               if (!hasClickedToPlay) setHasClickedToPlay(true);
             }}
-            className="absolute bottom-8 right-8 z-20 p-4 bg-black/20 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-white/10 transition-all duration-300"
+            className="absolute bottom-8 right-8 z-20 p-4 bg-black/20 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-[#e4ff40] hover:text-black hover:border-[#e4ff40] transition-all duration-300"
           >
             {isAudioMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
           </button>

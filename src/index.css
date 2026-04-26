@@ -22,13 +22,6 @@
   font-display: swap;
 }
 
-/* Force all RobotoMono text to a single gray color */
-[style*="RobotoMono"], 
-[style*='RobotoMono'], 
-.font-mono {
-  color: #888888 !important;
-}
-
 @theme {
   --font-serif: "HalenoirExpanded", "Playfair Display", serif;
   --font-sans: "HalenoirCompactText", "Helvetica Neue", Helvetica, Arial, sans-serif;
