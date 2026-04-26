@@ -607,7 +607,10 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                                  <p>Video was produced by the Circus team.</p>
                              </div>
                          </div>
-                         <VideoPlayerBlock videoUrl="https://res.cloudinary.com/dz154pwxa/video/upload/v1777141112/20260422_Visa_AO_Video_post_last_minute_mbja0n.mp4" />
+                         <VideoPlayerBlock 
+                          videoUrl={idx === 0 ? "https://res.cloudinary.com/dz154pwxa/video/upload/v1777141112/20260422_Visa_AO_Video_post_last_minute_mbja0n.mp4" : "https://res.cloudinary.com/dz154pwxa/video/upload/v1777142345/VISA_RECAP_2025_pmu0om.mp4"} 
+                          posterUrl={idx === 1 ? "https://res.cloudinary.com/dz154pwxa/video/upload/so_0/v1777141112/20260422_Visa_AO_Video_post_last_minute_mbja0n.jpg" : undefined}
+                        />
                      </div>
                   </div>
                 </div>
