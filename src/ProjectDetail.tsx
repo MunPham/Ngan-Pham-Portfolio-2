@@ -27,6 +27,22 @@ import visa1 from '../SOURCE/VISA/Visa japan.webp';
 import visa2 from '../SOURCE/VISA/Visa 711.webp';
 import visa3 from '../SOURCE/VISA/Visa Business.webp';
 
+import visaLM2 from '../SOURCE/VISA/Last minute 2.webp';
+import visaLM3 from '../SOURCE/VISA/Last minute 3.webp';
+import visaLM4 from '../SOURCE/VISA/Last minute 4.webp';
+import visaLM5 from '../SOURCE/VISA/Last minute 5.webp';
+import visaLM6 from '../SOURCE/VISA/Last minute 6.webp';
+import visaTrip1 from '../SOURCE/VISA/Visa trip 1.webp';
+
+import visaRecap1 from '../SOURCE/VISA/VISA RECAP 2025 1.webp';
+import visaRecap2 from '../SOURCE/VISA/VISA RECAP 2025 2.webp';
+import visaRecap3 from '../SOURCE/VISA/VISA RECAP 2025 3.webp';
+import visaRecap4 from '../SOURCE/VISA/VISA RECAP 2025 4.webp';
+import visaRecap5 from '../SOURCE/VISA/VISA RECAP 2025 5.webp';
+import visaRecap6 from '../SOURCE/VISA/VISA RECAP 2025 6.webp';
+import visaRecap7 from '../SOURCE/VISA/VISA RECAP 2025 7.webp';
+import visaRecap8 from '../SOURCE/VISA/VISA RECAP 2025 8.webp';
+
 import oliv1 from '../SOURCE/Ôliv/oliv 1.webp';
 import oliv2 from '../SOURCE/Ôliv/oliv 2.webp';
 import oliv3 from '../SOURCE/Ôliv/oliv 3.webp';
@@ -531,28 +547,67 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
               </div>
 
               {/* Section 2: Playlist Video Block */}
-              <div ref={visaSection2Ref} className="w-full shrink-0 min-h-full flex flex-col justify-start snap-start relative pt-8 md:pt-12 pb-10">
-                <div className="px-6 md:px-12 pb-6 shrink-0">
-                  <h3 className="text-[16px] text-white uppercase" style={{ fontFamily: "'HalenoirExpanded', 'Helvetica', sans-serif" }}>2 / Playlist</h3>
+              {[0, 1].map((idx) => (
+                <div key={`visa-${idx}`} ref={idx === 0 ? visaSection2Ref : null} className="w-full shrink-0 min-h-full flex flex-col justify-start snap-start relative pt-8 md:pt-12 pb-10">
+                  <div className="px-6 md:px-12 pb-6 shrink-0 flex items-center justify-between w-full">
+                    <h3 className="text-[16px] text-white uppercase" style={{ fontFamily: "'HalenoirExpanded', 'Helvetica', sans-serif" }}>2 / Playlist</h3>
+                    {idx === 0 && (
+                      <div 
+                        className="group flex flex-col items-end pl-2 md:pr-2 cursor-pointer pointer-events-auto"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const currentEl = e.currentTarget;
+                          const nextSection = currentEl.closest('.snap-start')?.nextElementSibling;
+                          if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
+                          <span className="text-[12px] tracking-[0.4em] uppercase" style={{ fontFamily: 'RobotoMono', fontSize: '12px' }}>Scroll down for more</span>
+                          <span className="relative flex items-center overflow-hidden w-4 h-4">
+                            <ArrowDown className="w-4 h-4 absolute opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-full shrink-0 flex justify-center items-center px-4 md:px-8 xl:px-12 h-[45vh] md:h-[55vh] xl:h-[65vh]">
+                     <div className="flex w-full gap-8 md:gap-8 lg:gap-12 xl:gap-24 h-full mx-auto justify-center items-center">
+                         <div className="flex flex-col gap-4 md:gap-6 h-full shrink-0 justify-center">
+                             <div className={`h-[75%] md:h-[80%] ${idx === 0 ? 'aspect-[6/5] grid-cols-3' : 'aspect-[8/5] grid-cols-4'} grid grid-rows-2 gap-2 md:gap-4 shrink-0`}>
+                                 {idx === 0 ? (
+                                   <>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaLM2} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaLM3} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaLM4} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaLM5} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaLM6} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaTrip1} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                   </>
+                                 ) : (
+                                   <>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap1} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap2} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap3} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap4} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap5} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap6} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap7} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                     <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src={visaRecap8} className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
+                                   </>
+                                 )}
+                             </div>
+                             <div className="text-[10px] md:text-sm text-white/50 font-sans">
+                                 <p className="text-white/80 font-medium">Designed still frames, animation briefs, and Midjourney Vee 3D motion footage.</p>
+                                 <p>Video was produced by the Circus team.</p>
+                             </div>
+                         </div>
+                         <VideoPlayerBlock videoUrl="https://res.cloudinary.com/dz154pwxa/video/upload/v1777141112/20260422_Visa_AO_Video_post_last_minute_mbja0n.mp4" />
+                     </div>
+                  </div>
                 </div>
-                <div className="w-full shrink-0 flex justify-center items-center px-4 md:px-8 xl:px-12 h-[45vh] md:h-[55vh] xl:h-[65vh]">
-                   <div className="flex w-full gap-8 md:gap-8 lg:gap-12 xl:gap-24 h-full mx-auto justify-center items-center">
-                       <div className="flex flex-col gap-4 md:gap-6 h-full shrink-0 justify-center">
-                           <div className="h-[75%] md:h-[80%] aspect-[4/5] grid grid-cols-2 grid-rows-2 gap-2 md:gap-4 shrink-0">
-                               <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src="https://i.postimg.cc/d1f7QFsJ/Screenshot-2026-04-18-at-18-02-38.png" className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
-                               <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src="https://i.postimg.cc/d1f7QFsJ/Screenshot-2026-04-18-at-18-02-38.png" className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
-                               <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src="https://i.postimg.cc/d1f7QFsJ/Screenshot-2026-04-18-at-18-02-38.png" className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
-                               <div className="w-full h-full bg-white/5 overflow-hidden group border border-white/10 relative"><img src="https://i.postimg.cc/d1f7QFsJ/Screenshot-2026-04-18-at-18-02-38.png" className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out group-hover:scale-105" alt="" /></div>
-                           </div>
-                           <div className="text-[10px] md:text-sm text-white/50 font-sans">
-                               <p className="text-white/80 font-medium">Designed still frames, animation briefs, and Midjourney Vee 3D motion footage.</p>
-                               <p>Video was produced by the Circus team.</p>
-                           </div>
-                       </div>
-                       <VideoPlayerBlock videoUrl="https://res.cloudinary.com/dz154pwxa/video/upload/v1777141112/20260422_Visa_AO_Video_post_last_minute_mbja0n.mp4" />
-                   </div>
-                </div>
-              </div>
+              ))}
             </div>
           ) : (
             <div className="w-full shrink-0 min-h-full snap-start flex flex-col justify-center pb-20 md:pb-24 pt-8 md:pt-10" >
