@@ -23,9 +23,9 @@ import tháng12 from '../SOURCE/LỊCH VISA 2026/THÁNG 12.webp';
 
 import up1 from '../SOURCE/7 UP/7up deck 1.webp';
 import up2 from '../SOURCE/7 UP/7up deck 2.webp';
-import visa1 from '../SOURCE/VISA/GG PAY 1.webp';
-import visa2 from '../SOURCE/VISA/GG PAY 2.webp';
-import visa3 from '../SOURCE/VISA/GG PAY 3.webp';
+import visa1 from '../SOURCE/VISA/Visa japan.webp';
+import visa2 from '../SOURCE/VISA/Visa 711.webp';
+import visa3 from '../SOURCE/VISA/Visa Business.webp';
 
 import oliv1 from '../SOURCE/Ôliv/oliv 1.webp';
 import oliv2 from '../SOURCE/Ôliv/oliv 2.webp';
@@ -385,7 +385,10 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                   
                   {/* Scroll Down Indicator */}
                   <div 
-                     onClick={scrollToTV}
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       scrollToTV();
+                     }}
                      className="group flex flex-col items-end cursor-pointer pr-2 pointer-events-auto"
                   >
                     <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
@@ -421,7 +424,10 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                   
                   {/* Scroll Down Indicator */}
                   <div 
-                     onClick={scrollToPonnieSection2}
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       scrollToPonnieSection2();
+                     }}
                      className="group flex flex-col items-end cursor-pointer pr-2 pointer-events-auto"
                   >
                     <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
@@ -505,7 +511,10 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
                   
                   {/* Scroll Down Indicator */}
                   <div 
-                     onClick={scrollToVisaSection2}
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       scrollToVisaSection2();
+                     }}
                      className="group flex flex-col items-end cursor-pointer pr-2 pointer-events-auto"
                   >
                     <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
@@ -844,7 +853,10 @@ const ProjectDetail = () => {
               <div className="w-full flex justify-center mt-4 pointer-events-none relative z-20">
                 {/* Scroll Down Indicator */}
                 <div 
-                   onClick={() => document.getElementById("other-merch")?.scrollIntoView({ behavior: 'smooth' })}
+                   onClick={(e) => {
+                     e.stopPropagation();
+                     document.getElementById("other-merch")?.scrollIntoView({ behavior: 'smooth' });
+                   }}
                    className="group flex flex-col items-center cursor-pointer pointer-events-auto"
                 >
                   <div className="flex items-center gap-2 text-[#888888] group-hover:text-[#e4ff40] transition-colors duration-300">
