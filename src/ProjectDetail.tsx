@@ -26,6 +26,7 @@ import up2 from '../SOURCE/7 UP/7up deck 2.webp';
 import visa1 from '../SOURCE/VISA/Visa japan.webp';
 import visa2 from '../SOURCE/VISA/Visa 711.webp';
 import visa3 from '../SOURCE/VISA/Visa Business.webp';
+import visa4 from '../SOURCE/VISA/VISA GRAB METRO+BUS.webp';
 
 import visaLM2 from '../SOURCE/VISA/Last minute 2.webp';
 import visaLM3 from '../SOURCE/VISA/Last minute 3.webp';
@@ -300,6 +301,7 @@ const ExpandedModal = ({ brandIndex, onClose }: { brandIndex: number, onClose: (
       ]
     : brand.name === "Visa"
     ? [
+        visa4,
         visa1,
         visa2,
         visa3
